@@ -36,21 +36,101 @@ function setQuery(e) {
 }
 
 function getResults(query) {
-	console.log(
-		`${OPENWEATHER_API.baseurl}weather?q=${query}&units=metric&APPID=${OPENWEATHER_API.key}`
-	);
+	// console.log(
+	// 	`${OPENWEATHER_API.baseurl}weather?q=${query}&units=metric&APPID=${OPENWEATHER_API.key}`
+	// );
 	fetch(
 		`${OPENWEATHER_API.baseurl}weather?q=${query}&units=metric&APPID=${OPENWEATHER_API.key}`
 	)
 		.then((weather) => {
 			return weather.json();
 		})
-		.then(displayResults);
+		.then(displayWeather);
+
+	console.log(`${AQI_API.baseurl}${query}/?token=${AQI_API.key}`);
+	fetch(`${AQI_API.baseurl}${query}/?token=${AQI_API.key}`)
+		.then((aqi) => {
+			return aqi.json();
+		})
+		.then(displayAQI);
 }
 
-function displayResults(weather) {
+function displayAQI(aqi) {
+	const aqiScale = {
+		Good:
+			"Air quality is considered satisfactory, and air pollution poses little or no risk",
+		Moderate:
+			"Air quality is acceptable; however, for some pollutants there may be a moderate health concern for a very small number of people who are unusually sensitive to air pollution.",
+		"Unhealthy for Sensitive Groups":
+			"Members of sensitive groups may experience health effects. The general public is not likely to be affected.",
+		Unhealthy:
+			"Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects",
+		"Very Unhealthy":
+			"Health warnings of emergency conditions. The entire population is more likely to be affected.",
+		Hazardous:
+			"Health alert: everyone may experience more serious health effects	",
+	};
+
+	const aqiColor = {
+		Good: "3ABE3F",
+		Moderate: "E4E752",
+		"Unhealthy for Sensitive Groups": "DD9C3A",
+		Unhealthy: "E22222",
+		"Very Unhealthy": "7B01A6",
+		Hazardous: "5F3900",
+	};
+
+	let currAQI = aqi.data.aqi;
+	let currAQIdescr = determineAqiScale(currAQI);
+
+	const aqiNumber = document.querySelector(".aqiContainer .aqiLeft .aqiNumber");
+	aqiNumber.innerText = currAQI;
+
+	const aqiInfo = document.querySelector(".aqiContainer .aqiRight p");
+	aqiInfo.innerText = aqiScale[currAQIdescr];
+
+	const aqiLevel = document.querySelector(
+		".aqiContainer .aqiLeft .aqiLabel button"
+	);
+	aqiLevel.innerText = currAQIdescr;
+	console.log(aqiColor[currAQIdescr]);
+	aqiLevel.style.backgroundColor = `#${aqiColor[currAQIdescr]}`;
+
+	const ozone = document.querySelector(
+		".aqiContainer .aqiLeft .additional .ozone"
+	);
+	ozone.innerText = `Ozone: ${aqi.data.iaqi.o3.v} |`;
+
+	const pm25 = document.querySelector(
+		".aqiContainer .aqiLeft .additional .pm25"
+	);
+	pm25.innerText = `PM2.5: ${aqi.data.iaqi.pm25.v}`;
+}
+
+function determineAqiScale(aqi) {
+	if (aqi <= 50) {
+		return "Good";
+	} else if (aqi >= 51 && aqi <= 100) {
+		return "Moderate";
+	} else if (aqi >= 101 && aqi <= 150) {
+		return "Unhealthy for Sensitive Groups";
+	} else if (aqi >= 151 && aqi <= 200) {
+		return "Unhealthy";
+	} else if (aqi >= 201 && aqi <= 300) {
+		return "Very Unhealthy";
+	} else {
+		return "Hazardous";
+	}
+}
+
+function displayWeather(weather) {
 	lat = weather.coord.lat;
 	lon = weather.coord.lon;
+
+	let now = new Date();
+	let time = document.querySelector(".location .time");
+	time.innerText = timeBuilder(now);
+
 	let city = document.querySelector(".location .city");
 	city.innerText = `${weather.name}, ${weather.sys.country}`;
 
@@ -97,4 +177,44 @@ function dateBuilder(d) {
 	let year = d.getFullYear();
 
 	return `${month} ${date}, ${year}`;
+}
+
+function timeBuilder(d) {
+	let hourConvert = {
+		0: "12",
+		1: "1",
+		2: "2",
+		3: "3",
+		4: "4",
+		5: "5",
+		6: "6",
+		7: "7",
+		8: "8",
+		9: "9",
+		10: "10",
+		11: "11",
+		12: "12",
+		13: "1",
+		14: "2",
+		15: "3",
+		16: "4",
+		17: "5",
+		18: "6",
+		19: "7",
+		20: "8",
+		21: "9",
+		22: "10",
+		23: "11",
+	};
+
+	let hour = hourConvert[d.getHours()];
+	let minute = d.getMinutes();
+	let amORpm;
+	if (d.getHours() >= 12) {
+		amORpm = "PM";
+	} else {
+		amORpm = "AM";
+	}
+
+	return `as of ${hour}:${minute}${amORpm}`;
 }

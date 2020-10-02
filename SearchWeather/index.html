@@ -46,7 +46,7 @@
 						type="text"
 						autocomplete="off"
 						class="search-box"
-						placeholder="Search for a city..."
+						placeholder="Search by name or zip code..."
 					/>
 				</div>
 			</header>
@@ -55,7 +55,8 @@
 				<section class="card">
 					<div class="location">
 						<span class="city"> Your Location </span>
-						<span class="date"> October 1ss, 2020</span>
+						<span class="date"> October 1, 2020</span>
+						<div class="time">- : -</div>
 					</div>
 					<div class="current">
 						<div class="temp">- - °F</div>
@@ -65,7 +66,28 @@
 					</div>
 				</section>
 
-				<section class="card">asd</section>
+				<section class="card">
+					<div class="aqiTitle">
+						<span class="abbrev">AQI</span>
+						<span class="full">Air Quality Index</span>
+					</div>
+					<div class="aqiContainer">
+						<div class="aqiLeft">
+							<div class="aqiNumber">- -</div>
+							<div class="aqiLabel">
+								<button>Good</button>
+							</div>
+							<div class="additional">
+								<span class="ozone">Ozone: |</span>
+								<span class="pm25">PM2.5: </span>
+							</div>
+						</div>
+
+						<div class="aqiRight">
+							<p>Information about the AQI number</p>
+						</div>
+					</div>
+				</section>
 			</main>
 		</div>
 		<script src="main.js"></script>
