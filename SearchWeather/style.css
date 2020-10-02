@@ -6,9 +6,9 @@
 
 body {
 	font-family: "Lato", sans-serif;
-	background-image: url("bg.jpg");
+	/* background-image: url("bg.jpg");
 	background-size: cover;
-	background-position: top center;
+	background-position: top center; */
 }
 
 .app-wrap {
@@ -17,9 +17,10 @@ body {
 	min-height: 100vh;
 	background-image: linear-gradient(
 		to bottom,
-		rgba(127, 178, 206, 0.5),
-		rgba(170, 109, 249, 0.5)
+		rgba(127, 178, 206, 1),
+		rgb(152, 96, 224)
 	);
+	position: relative;
 }
 
 .header_container {
@@ -33,10 +34,13 @@ body {
 header {
 	background: #3a3895;
 	box-shadow: 0px 2px 20px 10px rgb(0, 20, 85);
+	position: sticky;
+	top: 0;
+	z-index: 2;
 }
 
 header .logo svg {
-	height: 100px;
+	height: 80px;
 }
 
 header input {
@@ -79,7 +83,7 @@ main {
 }
 
 .card {
-	background: linear-gradient(to bottom, #2a37aa, rgba(95, 111, 255, 0.4));
+	background: linear-gradient(to bottom, #2a37aa, rgba(95, 111, 255, 0.21));
 	width: 50%;
 	height: 100%;
 	margin-bottom: 2rem;
