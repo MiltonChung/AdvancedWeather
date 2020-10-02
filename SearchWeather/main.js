@@ -2,6 +2,8 @@ const OPENWEATHER_API = {
 	key: "f875c884aeaad90f2cdd429caa0b6dc8",
 	baseurl: "http://api.openweathermap.org/data/2.5/",
 	icon_baseurl: "http://openweathermap.org/img/wn/",
+	baseurlZip: "http://api.openweathermap.org/data/2.5/weather?zip=",
+	//http://api.openweathermap.org/data/2.5/weather?zip=95132&appid=f875c884aeaad90f2cdd429caa0b6dc8
 };
 
 const AQI_API = {
@@ -18,6 +20,7 @@ const OPENGATE_API = {
 
 const searchbox = document.querySelector(".search-box");
 searchbox.addEventListener("keypress", setQuery);
+var isNumber = /^[0-9]+$/;
 let lat = 0;
 let lon = 0;
 
@@ -31,11 +34,28 @@ setDateOnLoad();
 function setQuery(e) {
 	if (e.keyCode == 13) {
 		//enter key
-		getResults(searchbox.value);
+		if (searchbox.value.match(isNumber)) {
+			getResultsByZip(searchbox.value);
+		} else {
+			getResultsByCity(searchbox.value);
+		}
 	}
 }
 
-function getResults(query) {
+function getResultsByZip(query) {
+	fetch(
+		`${OPENWEATHER_API.baseurlZip}${query}&units=metric&appid=${OPENWEATHER_API.key}`
+	)
+		.then((weather) => {
+			return weather.json();
+		})
+		.then(displayWeather)
+		.catch((e) => {
+			console.log("error", e);
+		});
+}
+
+function getResultsByCity(query) {
 	// console.log(
 	// 	`${OPENWEATHER_API.baseurl}weather?q=${query}&units=metric&APPID=${OPENWEATHER_API.key}`
 	// );
@@ -45,14 +65,22 @@ function getResults(query) {
 		.then((weather) => {
 			return weather.json();
 		})
-		.then(displayWeather);
+		.then(displayWeather)
+		.catch((e) => {
+			console.log("error", e);
+		});
+}
 
-	console.log(`${AQI_API.baseurl}${query}/?token=${AQI_API.key}`);
+function getAqiResult(query) {
+	// console.log(`${AQI_API.baseurl}${query}/?token=${AQI_API.key}`);
 	fetch(`${AQI_API.baseurl}${query}/?token=${AQI_API.key}`)
 		.then((aqi) => {
 			return aqi.json();
 		})
-		.then(displayAQI);
+		.then(displayAQI)
+		.catch((e) => {
+			console.log("error", e);
+		});
 }
 
 function displayAQI(aqi) {
@@ -69,6 +97,7 @@ function displayAQI(aqi) {
 			"Health warnings of emergency conditions. The entire population is more likely to be affected.",
 		Hazardous:
 			"Health alert: everyone may experience more serious health effects	",
+		"- -": "None",
 	};
 
 	const aqiColor = {
@@ -81,6 +110,9 @@ function displayAQI(aqi) {
 	};
 
 	let currAQI = aqi.data.aqi;
+	if (aqi.data.aqi == undefined) {
+		currAQI = "- -";
+	}
 	let currAQIdescr = determineAqiScale(currAQI);
 
 	const aqiNumber = document.querySelector(".aqiContainer .aqiLeft .aqiNumber");
@@ -93,7 +125,6 @@ function displayAQI(aqi) {
 		".aqiContainer .aqiLeft .aqiLabel button"
 	);
 	aqiLevel.innerText = currAQIdescr;
-	console.log(aqiColor[currAQIdescr]);
 	aqiLevel.style.backgroundColor = `#${aqiColor[currAQIdescr]}`;
 
 	const ozone = document.querySelector(
@@ -118,14 +149,22 @@ function determineAqiScale(aqi) {
 		return "Unhealthy";
 	} else if (aqi >= 201 && aqi <= 300) {
 		return "Very Unhealthy";
-	} else {
+	} else if (aqi > 300) {
 		return "Hazardous";
+	} else {
+		return "- -";
 	}
 }
 
 function displayWeather(weather) {
+	if (weather.cod === "404") {
+		badInput(weather);
+		return;
+	}
+
 	lat = weather.coord.lat;
 	lon = weather.coord.lon;
+	getAqiResult(weather.name);
 
 	let now = new Date();
 	let time = document.querySelector(".location .time");
@@ -137,10 +176,8 @@ function displayWeather(weather) {
 	let temp = document.querySelector(".current .temp");
 	let tempInC = Number(`${Math.round(weather.main.temp)}`);
 
-	// let weather_icon = document.querySelector(".current .weather_icon");
 	let current_icon_code = weather.weather[0].icon;
 	let complete_icon = `<img src="${OPENWEATHER_API.icon_baseurl}${current_icon_code}@2x.png" />`;
-	// weather_icon.innerHTML = complete_icon;
 	temp.innerHTML = `${CelToFah(tempInC)} °F ${complete_icon}`;
 
 	let weather_el = document.querySelector(".current .weather");
@@ -217,4 +254,8 @@ function timeBuilder(d) {
 	}
 
 	return `as of ${hour}:${minute}${amORpm}`;
+}
+
+function badInput(weather) {
+	alert("No results found! Please check your input.");
 }
