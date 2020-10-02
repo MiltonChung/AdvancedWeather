@@ -1,0 +1,142 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: "Lato", sans-serif;
+	background-image: url("bg.jpg");
+	background-size: cover;
+	background-position: top center;
+}
+
+.app-wrap {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	background-image: linear-gradient(
+		to bottom,
+		rgba(127, 178, 206, 0.5),
+		rgba(170, 109, 249, 0.5)
+	);
+}
+
+.header_container {
+	width: 90%;
+	margin: auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+header {
+	background: #3a3895;
+	box-shadow: 0px 2px 20px 10px rgb(0, 20, 85);
+}
+
+header .logo svg {
+	height: 100px;
+}
+
+header input {
+	width: 100%;
+	max-width: 280px;
+	padding: 10px 15px;
+	height: 50px;
+	justify-self: center;
+	align-self: center;
+	border: none;
+	outline: none;
+	background-color: #615fbc;
+	border-radius: 16px 0px 16px 0px;
+	border-bottom: 3px solid #8a88ff;
+
+	color: white;
+	font-size: 20px;
+	font-weight: 300;
+	transition: 0.2s ease-out;
+}
+
+::placeholder {
+	/* Chrome, Firefox, Opera, Safari 10.1+ */
+	color: #d0d0d0;
+	opacity: 1; /* Firefox */
+}
+
+header input:focus {
+	background-color: rgba(125, 123, 170, 0.685);
+}
+
+main {
+	flex: 1 1 100%;
+	padding: 25px 25px 50px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	text-align: left;
+}
+
+.card {
+	background: linear-gradient(to bottom, #2a37aa, rgba(95, 111, 255, 0.4));
+	width: 50%;
+	height: 355px;
+	margin-bottom: 2rem;
+	border-radius: 13px;
+	padding: 1.5rem;
+	position: relative;
+}
+
+.location .city {
+	color: #fff;
+	font-size: 33px;
+	font-weight: 400;
+	margin-bottom: 5px;
+}
+
+.location .date {
+	color: rgb(207, 207, 207);
+	font-weight: 300;
+	font-size: 25px;
+	margin-left: 0.4rem;
+}
+
+.current .temp {
+	color: #fff;
+	font-size: 118px;
+	font-weight: 900;
+	margin-bottom: 20px;
+	text-shadow: 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.current .temp span {
+	font-weight: 500;
+}
+
+.temp {
+	display: grid;
+	justify-content: center;
+	align-items: center;
+	grid-template-columns: 1.8fr 1fr;
+}
+
+.current .temp img {
+	height: 160px;
+	width: 160px;
+	justify-content: center;
+	align-items: center;
+}
+
+.current .weather {
+	color: #fff;
+	font-size: 30px;
+	font-weight: 700;
+	margin-bottom: 3px;
+}
+
+.current .hi-low {
+	color: #fff;
+	font-size: 30px;
+	font-weight: 500;
+}
