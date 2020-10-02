@@ -97,7 +97,8 @@ function displayAQI(aqi) {
 			"Health warnings of emergency conditions. The entire population is more likely to be affected.",
 		Hazardous:
 			"Health alert: everyone may experience more serious health effects	",
-		"- -": "None",
+		";(":
+			"Sorry, can't find the AQI for this. There may not be a station nearby.",
 	};
 
 	const aqiColor = {
@@ -111,7 +112,7 @@ function displayAQI(aqi) {
 
 	let currAQI = aqi.data.aqi;
 	if (aqi.data.aqi == undefined) {
-		currAQI = "- -";
+		currAQI = "-";
 	}
 	let currAQIdescr = determineAqiScale(currAQI);
 
@@ -152,7 +153,7 @@ function determineAqiScale(aqi) {
 	} else if (aqi > 300) {
 		return "Hazardous";
 	} else {
-		return "- -";
+		return ";(";
 	}
 }
 
