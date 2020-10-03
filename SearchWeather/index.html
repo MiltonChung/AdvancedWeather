@@ -8,6 +8,7 @@
 			href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap"
 			rel="stylesheet"
 		/>
+		<script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
 		<title>Weather Advanced</title>
 		<link rel="stylesheet" href="style.css" />
 	</head>
@@ -94,16 +95,100 @@
 
 				<!-- Current weather more detailed -->
 				<section class="card">
-					<div class="location">
-						<span class="city"> Your Location </span>
-						<span class="date"> October 1, 2020</span>
-						<div class="time">- : -</div>
-					</div>
-					<div class="current">
-						<div class="temp">- - °F</div>
-
-						<div class="weather">- -</div>
-						<div class="hi-low">-- °F / -- °F</div>
+					<div class="detailedWeather">Weather Today</div>
+					<div class="table">
+						<div class="tableLeft">
+							<div class="row">
+								<span class="rowLeft">
+									<span
+										class="iconify"
+										data-inline="false"
+										data-icon="bi:thermometer-half"
+									></span
+									>Feels Like</span
+								>
+								<span class="feelLike">-</span>
+							</div>
+							<div class="row">
+								<span class="rowLeft">
+									<span
+										class="iconify"
+										data-inline="false"
+										data-icon="carbon:pressure-filled"
+									></span>
+									Pressure</span
+								>
+								<span class="pressure">-</span>
+							</div>
+							<div class="row">
+								<span class="rowLeft"
+									><span
+										class="iconify"
+										data-inline="false"
+										data-icon="uil:wind"
+									></span>
+									Wind Speed</span
+								>
+								<span class="windSpeed">-</span>
+							</div>
+							<div class="row">
+								<span class="rowLeft"
+									><span
+										class="iconify"
+										data-inline="false"
+										data-icon="wi:wind-direction-se"
+									></span>
+									Wind Degrees</span
+								>
+								<span class="windDegrees">-</span>
+							</div>
+						</div>
+						<div class="tableRight">
+							<div class="row">
+								<span class="rowLeft"
+									><span
+										class="iconify"
+										data-inline="false"
+										data-icon="carbon:sunrise"
+									></span>
+									Sunrise</span
+								>
+								<span class="sunrise">-</span>
+							</div>
+							<div class="row">
+								<span class="rowLeft"
+									><span
+										class="iconify"
+										data-inline="false"
+										data-icon="carbon:sunset"
+									></span>
+									Sunset</span
+								>
+								<span class="sunset">-</span>
+							</div>
+							<div class="row">
+								<span class="rowLeft"
+									><span
+										class="iconify"
+										data-inline="false"
+										data-icon="carbon:uv-index"
+									></span>
+									UV Index</span
+								>
+								<span class="uvi">-</span>
+							</div>
+							<div class="row">
+								<span class="rowLeft"
+									><span
+										class="iconify"
+										data-inline="false"
+										data-icon="carbon:dew-point"
+									></span>
+									Dew Point</span
+								>
+								<span class="dewPoint">-</span>
+							</div>
+						</div>
 					</div>
 				</section>
 

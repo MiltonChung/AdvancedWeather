@@ -93,7 +93,8 @@ main {
 }
 
 .location .city,
-.aqiTitle .abbrev {
+.aqiTitle .abbrev,
+.detailedWeather {
 	color: #fff;
 	font-size: 33px;
 	font-weight: 400;
@@ -198,4 +199,38 @@ main {
 	color: white;
 	font-size: 18px;
 	margin-top: 1.2rem;
+}
+
+.table {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	column-gap: 1.2rem;
+	margin-top: 1rem;
+}
+
+.table .tableLeft,
+.table .tableRight {
+	display: grid;
+	grid-template-rows: repeat(4, 1fr);
+	color: white;
+	font-size: 18px;
+	font-weight: 200;
+	row-gap: 0.9rem;
+}
+
+.table .tableLeft {
+	border-right: white solid 1px;
+}
+
+.table .tableLeft .row,
+.table .tableRight .row {
+	display: flex;
+	justify-content: space-between;
+	padding-right: 1.5rem;
+}
+
+.rowLeft svg {
+	height: 20px;
+	width: 20px;
+	color: white;
 }

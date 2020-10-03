@@ -2,7 +2,9 @@ const OPENWEATHER_API = {
 	key: "f875c884aeaad90f2cdd429caa0b6dc8",
 	baseurl: "http://api.openweathermap.org/data/2.5/",
 	icon_baseurl: "http://openweathermap.org/img/wn/",
-	baseurlZip: "http://api.openweathermap.org/data/2.5/weather?zip=",
+	zip_baseurl: "http://api.openweathermap.org/data/2.5/weather?zip=",
+	latlong_baseurl: "https://api.openweathermap.org/data/2.5/onecall?",
+	// https://api.openweathermap.org/data/2.5/onecall?lat=37.338207&lon=-121.886330&appid=f875c884aeaad90f2cdd429caa0b6dc8
 	//http://api.openweathermap.org/data/2.5/weather?zip=95132&appid=f875c884aeaad90f2cdd429caa0b6dc8
 };
 
@@ -44,7 +46,7 @@ function setQuery(e) {
 
 function getResultsByZip(query) {
 	fetch(
-		`${OPENWEATHER_API.baseurlZip}${query}&units=metric&appid=${OPENWEATHER_API.key}`
+		`${OPENWEATHER_API.zip_baseurl}${query}&units=metric&appid=${OPENWEATHER_API.key}`
 	)
 		.then((weather) => {
 			return weather.json();
@@ -169,7 +171,7 @@ function displayWeather(weather) {
 
 	let now = new Date();
 	let time = document.querySelector(".location .time");
-	time.innerText = timeBuilder(now);
+	time.innerText = `as of ${timeBuilder(now)}`;
 
 	let city = document.querySelector(".location .city");
 	city.innerText = `${weather.name}, ${weather.sys.country}`;
@@ -188,6 +190,48 @@ function displayWeather(weather) {
 	let tempInCHi = Number(`${Math.round(weather.main.temp_max)}`);
 	let tempInCLow = Number(`${Math.round(weather.main.temp_min)}`);
 	hilow.innerText = `${CelToFah(tempInCHi)}°F / ${CelToFah(tempInCLow)}°F`;
+	getDetailedWeather(lat, lon);
+}
+
+function getDetailedWeather(lat, lon) {
+	fetch(
+		`${OPENWEATHER_API.latlong_baseurl}lat=${lat}&lon=${lon}&units=imperial&appid=${OPENWEATHER_API.key}`
+	)
+		.then((detailedWeather) => {
+			return detailedWeather.json();
+		})
+		.then(displayDetailedWeather)
+		.catch((e) => {
+			console.log("error", e);
+		});
+}
+
+function displayDetailedWeather(dWeather) {
+	let feelsLike = document.querySelector(".tableLeft .row .feelLike");
+	feelsLike.innerText = `${dWeather.current.feels_like}°F`;
+
+	let pressure = document.querySelector(".tableLeft .row .pressure");
+	pressure.innerText = `${dWeather.current.pressure} hPa`;
+
+	let windSpeed = document.querySelector(".tableLeft .row .windSpeed");
+	windSpeed.innerText = `${dWeather.current.wind_speed} mph`;
+
+	let windDegree = document.querySelector(".tableLeft .row .windDegrees");
+	windDegree.innerText = `${dWeather.current.wind_deg}°`;
+
+	let sunrise = document.querySelector(".tableRight .row .sunrise");
+	let sunriseInUTC = new Date(dWeather.current.sunrise * 1000);
+	sunrise.innerText = `${timeBuilder(sunriseInUTC)}`;
+
+	let sunset = document.querySelector(".tableRight .row .sunset");
+	let sunsetInUTC = new Date(dWeather.current.sunset * 1000);
+	sunset.innerText = `${timeBuilder(sunsetInUTC)}`;
+
+	let uvi = document.querySelector(".tableRight .row .uvi");
+	uvi.innerText = `${dWeather.current.uvi} of 10`;
+
+	let dewPoint = document.querySelector(".tableRight .row .dewPoint");
+	dewPoint.innerText = `${dWeather.current.dew_point}°`;
 }
 
 function CelToFah(c) {
@@ -247,6 +291,9 @@ function timeBuilder(d) {
 
 	let hour = hourConvert[d.getHours()];
 	let minute = d.getMinutes();
+	if (minute.toString().length < 2) {
+		minute = "0" + minute.toString();
+	}
 	let amORpm;
 	if (d.getHours() >= 12) {
 		amORpm = "PM";
@@ -254,7 +301,7 @@ function timeBuilder(d) {
 		amORpm = "AM";
 	}
 
-	return `as of ${hour}:${minute}${amORpm}`;
+	return `${hour}:${minute}${amORpm}`;
 }
 
 function badInput(weather) {
