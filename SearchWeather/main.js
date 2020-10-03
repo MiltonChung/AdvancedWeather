@@ -1,8 +1,8 @@
 const OPENWEATHER_API = {
 	key: "f875c884aeaad90f2cdd429caa0b6dc8",
-	baseurl: "http://api.openweathermap.org/data/2.5/",
-	icon_baseurl: "http://openweathermap.org/img/wn/",
-	zip_baseurl: "http://api.openweathermap.org/data/2.5/weather?zip=",
+	baseurl: "https://api.openweathermap.org/data/2.5/",
+	icon_baseurl: "https://openweathermap.org/img/wn/",
+	zip_baseurl: "https://api.openweathermap.org/data/2.5/weather?zip=",
 	latlong_baseurl: "https://api.openweathermap.org/data/2.5/onecall?",
 	// https://api.openweathermap.org/data/2.5/onecall?lat=37.338207&lon=-121.886330&appid=f875c884aeaad90f2cdd429caa0b6dc8
 	//http://api.openweathermap.org/data/2.5/weather?zip=95132&appid=f875c884aeaad90f2cdd429caa0b6dc8
