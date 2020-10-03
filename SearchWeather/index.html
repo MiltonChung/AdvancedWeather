@@ -16,7 +16,7 @@
 		<div class="app-wrap">
 			<header>
 				<div class="header_container">
-					<div class="logo">
+					<a class="logo" href="#">
 						<svg
 							width="149"
 							height="123"
@@ -42,8 +42,7 @@
 								fill="#9038FF"
 							/>
 						</svg>
-					</div>
-					<a href="#cardsss">go to card2</a>
+					</a>
 					<input
 						type="text"
 						autocomplete="off"
@@ -51,11 +50,20 @@
 						placeholder="Search by name or zip code..."
 					/>
 				</div>
+				<nav>
+					<ul>
+						<li><a href="#currentWeather">Now</a></li>
+						<li><a href="#currentAqi">AQI</a></li>
+						<li><a href="#detailedWeather">Detailed</a></li>
+						<li><a href="#hourlyWeather">Hourly</a></li>
+						<li><a href="#dailyWeather">Daily</a></li>
+					</ul>
+				</nav>
 			</header>
 
 			<main>
 				<!-- Current Weather -->
-				<section class="card" id="currentWeather">
+				<section class="card target" id="currentWeather">
 					<div class="location">
 						<span class="city"> Your Location </span>
 						<span class="date"> October 1, 2020</span>
@@ -70,7 +78,7 @@
 				</section>
 
 				<!-- Current AQI -->
-				<section class="card" id="currentAqi">
+				<section class="card target" id="currentAqi">
 					<div class="aqiTitle">
 						<span class="abbrev">AQI</span>
 						<span class="full">Air Quality Index</span>
@@ -94,7 +102,7 @@
 				</section>
 
 				<!-- Current weather more detailed -->
-				<section class="card" id="detailedWeather">
+				<section class="card target" id="detailedWeather">
 					<div class="detailedWeather">Weather Today</div>
 					<div class="table">
 						<div class="tableLeft">
