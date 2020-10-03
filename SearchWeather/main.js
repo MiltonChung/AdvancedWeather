@@ -230,8 +230,8 @@ function displayDetailedWeather(dWeather) {
 	let uvi = document.querySelector(".tableRight .row .uvi");
 	uvi.innerText = `${dWeather.current.uvi} of 10`;
 
-	let dewPoint = document.querySelector(".tableRight .row .dewPoint");
-	dewPoint.innerText = `${dWeather.current.dew_point}°`;
+	let humidity = document.querySelector(".tableRight .row .humidity");
+	humidity.innerText = `${dWeather.current.humidity}%`;
 
 	displayHourlyWeather(dWeather);
 	displayDailyWeather(dWeather);
@@ -253,69 +253,69 @@ function displayHourlyWeather(dWeather) {
 
 	// Display next hour
 	let hourlyOne = document.querySelector(".hourlyRow .col .hourlyOne");
-	let hourOne = new Date(dWeather.hourly[0].dt * 1000);
+	let hourOne = new Date(dWeather.hourly[1].dt * 1000);
 	hourlyOne.innerText = formatHour(hourOne);
 	let hourlyOneTemp = document.querySelector(".hourlyRow .col .hourlyOneTemp");
-	hourlyOneTemp.innerText = `${Math.floor(dWeather.hourly[0].temp)}°F`;
+	hourlyOneTemp.innerText = `${Math.floor(dWeather.hourly[1].temp)}°F`;
 	let hourlyOneIcon = document.querySelector(".hourlyRow .col .hourlyOneIcon");
-	let hourlyOneIconImg = getWeatherIconImg(dWeather.hourly[0].weather[0].icon);
+	let hourlyOneIconImg = getWeatherIconImg(dWeather.hourly[1].weather[0].icon);
 	hourlyOneIcon.innerHTML = `${hourlyOneIconImg}`;
 	let hourlyOneDescr = document.querySelector(
 		".hourlyRow .col .hourlyOneDescr"
 	);
-	hourlyOneDescr.innerText = `${dWeather.hourly[0].weather[0].main}`;
+	hourlyOneDescr.innerText = `${dWeather.hourly[1].weather[0].main}`;
 
 	// Display 2 hours from now
 	let hourlyTwo = document.querySelector(".hourlyRow .col .hourlyTwo");
-	let hourTwo = new Date(dWeather.hourly[1].dt * 1000);
+	let hourTwo = new Date(dWeather.hourly[2].dt * 1000);
 	hourlyTwo.innerText = formatHour(hourTwo);
 	let hourlyTwoTemp = document.querySelector(".hourlyRow .col .hourlyTwoTemp");
-	hourlyTwoTemp.innerText = `${Math.floor(dWeather.hourly[1].temp)}°F`;
+	hourlyTwoTemp.innerText = `${Math.floor(dWeather.hourly[2].temp)}°F`;
 	let hourlyTwoIcon = document.querySelector(".hourlyRow .col .hourlyTwoIcon");
-	let hourlyTwoIconImg = getWeatherIconImg(dWeather.hourly[1].weather[0].icon);
+	let hourlyTwoIconImg = getWeatherIconImg(dWeather.hourly[2].weather[0].icon);
 	hourlyTwoIcon.innerHTML = `${hourlyTwoIconImg}`;
 	let hourlyTwoDescr = document.querySelector(
 		".hourlyRow .col .hourlyTwoDescr"
 	);
-	hourlyTwoDescr.innerText = `${dWeather.hourly[1].weather[0].main}`;
+	hourlyTwoDescr.innerText = `${dWeather.hourly[2].weather[0].main}`;
 
 	// Display 3 hours from now
 	let hourlyThree = document.querySelector(".hourlyRow .col .hourlyThree");
-	let hourThree = new Date(dWeather.hourly[2].dt * 1000);
+	let hourThree = new Date(dWeather.hourly[3].dt * 1000);
 	hourlyThree.innerText = formatHour(hourThree);
 	let hourlyThreeTemp = document.querySelector(
 		".hourlyRow .col .hourlyThreeTemp"
 	);
-	hourlyThreeTemp.innerText = `${Math.floor(dWeather.hourly[2].temp)}°F`;
+	hourlyThreeTemp.innerText = `${Math.floor(dWeather.hourly[3].temp)}°F`;
 	let hourlyThreeIcon = document.querySelector(
 		".hourlyRow .col .hourlyThreeIcon"
 	);
 	let hourlyThreeIconImg = getWeatherIconImg(
-		dWeather.hourly[2].weather[0].icon
+		dWeather.hourly[3].weather[0].icon
 	);
 	hourlyThreeIcon.innerHTML = `${hourlyThreeIconImg}`;
 	let hourlyThreeDescr = document.querySelector(
 		".hourlyRow .col .hourlyThreeDescr"
 	);
-	hourlyThreeDescr.innerText = `${dWeather.hourly[2].weather[0].main}`;
+	hourlyThreeDescr.innerText = `${dWeather.hourly[3].weather[0].main}`;
 
 	// Display 4 hours from now
 	let hourlyFour = document.querySelector(".hourlyRow .col .hourlyFour");
-	let hourFour = new Date(dWeather.hourly[3].dt * 1000);
+	let hourFour = new Date(dWeather.hourly[4].dt * 1000);
 	hourlyFour.innerText = formatHour(hourFour);
 	let hourlyFourTemp = document.querySelector(
 		".hourlyRow .col .hourlyFourTemp"
 	);
-	hourlyFourTemp.innerText = `${Math.floor(dWeather.hourly[3].temp)}°F`;
+	hourlyFourTemp.innerText = `${Math.floor(dWeather.hourly[4].temp)}°F`;
 	let hourlyFourIcon = document.querySelector(
 		".hourlyRow .col .hourlyFourIcon"
 	);
-	let hourlyFourIconImg = getWeatherIconImg(dWeather.hourly[3].weather[0].icon);
+	let hourlyFourIconImg = getWeatherIconImg(dWeather.hourly[4].weather[0].icon);
 	hourlyFourIcon.innerHTML = `${hourlyFourIconImg}`;
 	let hourlyFourDescr = document.querySelector(
 		".hourlyRow .col .hourlyFourDescr"
 	);
-	hourlyFourDescr.innerText = `${dWeather.hourly[3].weather[0].main}`;
+	hourlyFourDescr.innerText = `${dWeather.hourly[4].weather[0].main}`;
 }
 
 function displayDailyWeather(dWeather) {
@@ -332,76 +332,68 @@ function displayDailyWeather(dWeather) {
 
 	// Display next day
 	let dailyOne = document.querySelector(".dailyRow .col .dailyOne");
-	let dayOne = new Date(dWeather.daily[0].dt * 1000);
+	let dayOne = new Date(dWeather.daily[1].dt * 1000);
 	dailyOne.innerText = formatDateAndDay(dayOne);
 	let dailyOneTemp = document.querySelector(".dailyRow .col .dailyOneTemp");
-	dailyOneTemp.innerText = `${Math.floor(dWeather.daily[0].temp.day)}°F`;
+	dailyOneTemp.innerText = `${Math.floor(dWeather.daily[1].temp.day)}°F`;
 	let dailyOneIcon = document.querySelector(".dailyRow .col .dailyOneIcon");
-	let dailyOneIconImg = getWeatherIconImg(dWeather.daily[0].weather[0].icon);
+	let dailyOneIconImg = getWeatherIconImg(dWeather.daily[1].weather[0].icon);
 	dailyOneIcon.innerHTML = `${dailyOneIconImg}`;
 	let dailyOneDescr = document.querySelector(".dailyRow .col .dailyOneDescr");
-	dailyOneDescr.innerText = `${dWeather.daily[0].weather[0].main}`;
+	dailyOneDescr.innerText = `${dWeather.daily[1].weather[0].main}`;
 
-	// Display 2 hours from now
-	let hourlyTwo = document.querySelector(".hourlyRow .col .hourlyTwo");
-	let hourTwo = new Date(dWeather.hourly[1].dt * 1000);
-	hourlyTwo.innerText = formatHour(hourTwo);
-	let hourlyTwoTemp = document.querySelector(".hourlyRow .col .hourlyTwoTemp");
-	hourlyTwoTemp.innerText = `${Math.floor(dWeather.hourly[1].temp)}°F`;
-	let hourlyTwoIcon = document.querySelector(".hourlyRow .col .hourlyTwoIcon");
-	let hourlyTwoIconImg = getWeatherIconImg(dWeather.hourly[1].weather[0].icon);
-	hourlyTwoIcon.innerHTML = `${hourlyTwoIconImg}`;
-	let hourlyTwoDescr = document.querySelector(
-		".hourlyRow .col .hourlyTwoDescr"
-	);
-	hourlyTwoDescr.innerText = `${dWeather.hourly[1].weather[0].main}`;
+	// Display 2 days from now
+	let dailyTwo = document.querySelector(".dailyRow .col .dailyTwo");
+	let dayTwo = new Date(dWeather.daily[2].dt * 1000);
+	dailyTwo.innerText = formatDateAndDay(dayTwo);
+	let dailyTwoTemp = document.querySelector(".dailyRow .col .dailyTwoTemp");
+	dailyTwoTemp.innerText = `${Math.floor(dWeather.daily[2].temp.day)}°F`;
+	let dailyTwoIcon = document.querySelector(".dailyRow .col .dailyTwoIcon");
+	let dailyTwoIconImg = getWeatherIconImg(dWeather.daily[2].weather[0].icon);
+	dailyTwoIcon.innerHTML = `${dailyTwoIconImg}`;
+	let dailyTwoDescr = document.querySelector(".dailyRow .col .dailyTwoDescr");
+	dailyTwoDescr.innerText = `${dWeather.daily[2].weather[0].main}`;
 
-	// Display 3 hours from now
-	let hourlyThree = document.querySelector(".hourlyRow .col .hourlyThree");
-	let hourThree = new Date(dWeather.hourly[2].dt * 1000);
-	hourlyThree.innerText = formatHour(hourThree);
-	let hourlyThreeTemp = document.querySelector(
-		".hourlyRow .col .hourlyThreeTemp"
+	// Display 3 days from now
+	let dailyThree = document.querySelector(".dailyRow .col .dailyThree");
+	let dayThree = new Date(dWeather.daily[3].dt * 1000);
+	dailyThree.innerText = formatDateAndDay(dayThree);
+	let dailyThreeTemp = document.querySelector(".dailyRow .col .dailyThreeTemp");
+	dailyThreeTemp.innerText = `${Math.floor(dWeather.daily[3].temp.day)}°F`;
+	let dailyThreeIcon = document.querySelector(".dailyRow .col .dailyThreeIcon");
+	let dailyThreeIconImg = getWeatherIconImg(dWeather.daily[3].weather[0].icon);
+	dailyThreeIcon.innerHTML = `${dailyThreeIconImg}`;
+	let dailyThreeDescr = document.querySelector(
+		".dailyRow .col .dailyThreeDescr"
 	);
-	hourlyThreeTemp.innerText = `${Math.floor(dWeather.hourly[2].temp)}°F`;
-	let hourlyThreeIcon = document.querySelector(
-		".hourlyRow .col .hourlyThreeIcon"
-	);
-	let hourlyThreeIconImg = getWeatherIconImg(
-		dWeather.hourly[2].weather[0].icon
-	);
-	hourlyThreeIcon.innerHTML = `${hourlyThreeIconImg}`;
-	let hourlyThreeDescr = document.querySelector(
-		".hourlyRow .col .hourlyThreeDescr"
-	);
-	hourlyThreeDescr.innerText = `${dWeather.hourly[2].weather[0].main}`;
+	dailyThreeDescr.innerText = `${dWeather.daily[3].weather[0].main}`;
 
-	// Display 4 hours from now
-	let hourlyFour = document.querySelector(".hourlyRow .col .hourlyFour");
-	let hourFour = new Date(dWeather.hourly[3].dt * 1000);
-	hourlyFour.innerText = formatHour(hourFour);
-	let hourlyFourTemp = document.querySelector(
-		".hourlyRow .col .hourlyFourTemp"
-	);
-	hourlyFourTemp.innerText = `${Math.floor(dWeather.hourly[3].temp)}°F`;
-	let hourlyFourIcon = document.querySelector(
-		".hourlyRow .col .hourlyFourIcon"
-	);
-	let hourlyFourIconImg = getWeatherIconImg(dWeather.hourly[3].weather[0].icon);
-	hourlyFourIcon.innerHTML = `${hourlyFourIconImg}`;
-	let hourlyFourDescr = document.querySelector(
-		".hourlyRow .col .hourlyFourDescr"
-	);
-	hourlyFourDescr.innerText = `${dWeather.hourly[3].weather[0].main}`;
+	// Display 4 days from now
+	let dailyFour = document.querySelector(".dailyRow .col .dailyFour");
+	let dayFour = new Date(dWeather.daily[4].dt * 1000);
+	dailyFour.innerText = formatDateAndDay(dayFour);
+	let dailyFourTemp = document.querySelector(".dailyRow .col .dailyFourTemp");
+	dailyFourTemp.innerText = `${Math.floor(dWeather.daily[4].temp.day)}°F`;
+	let dailyFourIcon = document.querySelector(".dailyRow .col .dailyFourIcon");
+	let dailyFourIconImg = getWeatherIconImg(dWeather.daily[4].weather[0].icon);
+	dailyFourIcon.innerHTML = `${dailyFourIconImg}`;
+	let dailyFourDescr = document.querySelector(".dailyRow .col .dailyFourDescr");
+	dailyFourDescr.innerText = `${dWeather.daily[4].weather[0].main}`;
 }
 
 function formatHour(time) {
 	let hour = time.getHours();
 	let amORpm = "am";
-	if (hour >= 12) {
+	console.log(hour);
+	if (hour > 12) {
 		hour = hour - 12;
 		amORpm = "pm";
 		return `${hour}${amORpm}`;
+	} else if (hour == 0) {
+		return `12${amORpm}`;
+	} else if (hour == 12) {
+		amORpm = "pm";
+		return `12${amORpm}`;
 	} else {
 		return `${hour}${amORpm}`;
 	}

@@ -55,7 +55,7 @@
 
 			<main>
 				<!-- Current Weather -->
-				<section class="card">
+				<section class="card" id="currentWeather">
 					<div class="location">
 						<span class="city"> Your Location </span>
 						<span class="date"> October 1, 2020</span>
@@ -70,7 +70,7 @@
 				</section>
 
 				<!-- Current AQI -->
-				<section class="card">
+				<section class="card" id="currentAqi">
 					<div class="aqiTitle">
 						<span class="abbrev">AQI</span>
 						<span class="full">Air Quality Index</span>
@@ -94,7 +94,7 @@
 				</section>
 
 				<!-- Current weather more detailed -->
-				<section class="card">
+				<section class="card" id="detailedWeather">
 					<div class="detailedWeather">Weather Today</div>
 					<div class="table">
 						<div class="tableLeft">
@@ -182,18 +182,19 @@
 									><span
 										class="iconify"
 										data-inline="false"
-										data-icon="carbon:dew-point"
+										data-icon="carbon:humidity"
 									></span>
-									Dew Point</span
+
+									Humidity</span
 								>
-								<span class="dewPoint">-</span>
+								<span class="humidity">-</span>
 							</div>
 						</div>
 					</div>
 				</section>
 
 				<!-- Weather hourly forcast -->
-				<section class="card">
+				<section class="card" id="hourlyWeather">
 					<div class="hourlyForecast">Hourly Forecast</div>
 					<div class="hourlyRow">
 						<div class="col">
@@ -230,7 +231,7 @@
 				</section>
 
 				<!--  Weather daily forcast -->
-				<section class="card">
+				<section class="card" id="dailyWeather">
 					<div class="dailyForecast">Daily Forecast</div>
 					<div class="dailyRow">
 						<div class="col">
@@ -266,6 +267,8 @@
 					</div>
 				</section>
 			</main>
+
+			<footer>hi</footer>
 		</div>
 		<script src="main.js"></script>
 	</body>
