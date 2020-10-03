@@ -318,7 +318,82 @@ function displayHourlyWeather(dWeather) {
 	hourlyFourDescr.innerText = `${dWeather.hourly[3].weather[0].main}`;
 }
 
-function displayDailyWeather(dWeather) {}
+function displayDailyWeather(dWeather) {
+	// Display current weather
+	let dailyNow = document.querySelector(".dailyRow .col .dailyNow");
+	dailyNow.innerText = "Today";
+	let dailyNowTemp = document.querySelector(".dailyRow .col .dailyNowTemp");
+	dailyNowTemp.innerText = `${Math.floor(dWeather.current.temp)}°F`;
+	let dailyNowIcon = document.querySelector(".dailyRow .col .dailyNowIcon");
+	let dailyNowIconImg = getWeatherIconImg(dWeather.current.weather[0].icon);
+	dailyNowIcon.innerHTML = `${dailyNowIconImg}`;
+	let dailyNowDescr = document.querySelector(".dailyRow .col .dailyNowDescr");
+	dailyNowDescr.innerText = `${dWeather.current.weather[0].main}`;
+
+	// Display next day
+	let dailyOne = document.querySelector(".dailyRow .col .dailyOne");
+	let dayOne = new Date(dWeather.daily[0].dt * 1000);
+	dailyOne.innerText = formatDateAndDay(dayOne);
+	let dailyOneTemp = document.querySelector(".dailyRow .col .dailyOneTemp");
+	dailyOneTemp.innerText = `${Math.floor(dWeather.daily[0].temp.day)}°F`;
+	let dailyOneIcon = document.querySelector(".dailyRow .col .dailyOneIcon");
+	let dailyOneIconImg = getWeatherIconImg(dWeather.daily[0].weather[0].icon);
+	dailyOneIcon.innerHTML = `${dailyOneIconImg}`;
+	let dailyOneDescr = document.querySelector(".dailyRow .col .dailyOneDescr");
+	dailyOneDescr.innerText = `${dWeather.daily[0].weather[0].main}`;
+
+	// Display 2 hours from now
+	let hourlyTwo = document.querySelector(".hourlyRow .col .hourlyTwo");
+	let hourTwo = new Date(dWeather.hourly[1].dt * 1000);
+	hourlyTwo.innerText = formatHour(hourTwo);
+	let hourlyTwoTemp = document.querySelector(".hourlyRow .col .hourlyTwoTemp");
+	hourlyTwoTemp.innerText = `${Math.floor(dWeather.hourly[1].temp)}°F`;
+	let hourlyTwoIcon = document.querySelector(".hourlyRow .col .hourlyTwoIcon");
+	let hourlyTwoIconImg = getWeatherIconImg(dWeather.hourly[1].weather[0].icon);
+	hourlyTwoIcon.innerHTML = `${hourlyTwoIconImg}`;
+	let hourlyTwoDescr = document.querySelector(
+		".hourlyRow .col .hourlyTwoDescr"
+	);
+	hourlyTwoDescr.innerText = `${dWeather.hourly[1].weather[0].main}`;
+
+	// Display 3 hours from now
+	let hourlyThree = document.querySelector(".hourlyRow .col .hourlyThree");
+	let hourThree = new Date(dWeather.hourly[2].dt * 1000);
+	hourlyThree.innerText = formatHour(hourThree);
+	let hourlyThreeTemp = document.querySelector(
+		".hourlyRow .col .hourlyThreeTemp"
+	);
+	hourlyThreeTemp.innerText = `${Math.floor(dWeather.hourly[2].temp)}°F`;
+	let hourlyThreeIcon = document.querySelector(
+		".hourlyRow .col .hourlyThreeIcon"
+	);
+	let hourlyThreeIconImg = getWeatherIconImg(
+		dWeather.hourly[2].weather[0].icon
+	);
+	hourlyThreeIcon.innerHTML = `${hourlyThreeIconImg}`;
+	let hourlyThreeDescr = document.querySelector(
+		".hourlyRow .col .hourlyThreeDescr"
+	);
+	hourlyThreeDescr.innerText = `${dWeather.hourly[2].weather[0].main}`;
+
+	// Display 4 hours from now
+	let hourlyFour = document.querySelector(".hourlyRow .col .hourlyFour");
+	let hourFour = new Date(dWeather.hourly[3].dt * 1000);
+	hourlyFour.innerText = formatHour(hourFour);
+	let hourlyFourTemp = document.querySelector(
+		".hourlyRow .col .hourlyFourTemp"
+	);
+	hourlyFourTemp.innerText = `${Math.floor(dWeather.hourly[3].temp)}°F`;
+	let hourlyFourIcon = document.querySelector(
+		".hourlyRow .col .hourlyFourIcon"
+	);
+	let hourlyFourIconImg = getWeatherIconImg(dWeather.hourly[3].weather[0].icon);
+	hourlyFourIcon.innerHTML = `${hourlyFourIconImg}`;
+	let hourlyFourDescr = document.querySelector(
+		".hourlyRow .col .hourlyFourDescr"
+	);
+	hourlyFourDescr.innerText = `${dWeather.hourly[3].weather[0].main}`;
+}
 
 function formatHour(time) {
 	let hour = time.getHours();
@@ -332,9 +407,15 @@ function formatHour(time) {
 	}
 }
 
-// function formatDateAndDay(date) {
-
-// }
+function formatDateAndDay(d) {
+	let days = ["Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat"];
+	let day = days[d.getDay()];
+	let date = d.getDate();
+	if (date.toString().length < 2) {
+		date = "0" + date.toString();
+	}
+	return `${day} ${date}`;
+}
 
 function getWeatherIconImg(code) {
 	return `<img src="${OPENWEATHER_API.icon_baseurl}${code}@2x.png" />`;
