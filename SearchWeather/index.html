@@ -9,6 +9,12 @@
 			rel="stylesheet"
 		/>
 		<script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
+		<!-- Load icon library -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+		/>
+
 		<title>Weather Advanced</title>
 		<link rel="stylesheet" href="style.css" />
 	</head>
@@ -43,12 +49,18 @@
 							/>
 						</svg>
 					</a>
-					<input
-						type="text"
-						autocomplete="off"
-						class="search-box"
-						placeholder="Search by name or zip code..."
-					/>
+					<div class="searchBar">
+						<input
+							type="search"
+							autocomplete="off"
+							class="search-box"
+							placeholder="Search by name or zip code..."
+							inputmode="search"
+						/>
+						<button id="searchButton">
+							<i class="fa fa-search"></i>
+						</button>
+					</div>
 				</div>
 				<nav>
 					<ul>

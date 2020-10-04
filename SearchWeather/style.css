@@ -31,7 +31,7 @@ body {
 }
 
 section {
-	scroll-margin-top: 7rem;
+	scroll-margin-top: 10rem;
 }
 
 .header_container {
@@ -56,8 +56,9 @@ header .logo svg {
 
 header input {
 	width: 100%;
-	max-width: 300px;
-	padding: 10px 15px;
+	float: left;
+	max-width: 350px;
+	padding: 10px 15px 10px 45px;
 	height: 50px;
 	justify-self: center;
 	align-self: center;
@@ -80,7 +81,38 @@ header input {
 }
 
 header input:focus {
-	background-color: rgba(125, 123, 170, 0.685);
+	background-color: rgba(175, 170, 255, 0.685);
+}
+
+.searchBar {
+	position: relative;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+	cursor: pointer;
+}
+
+/* Style the submit button */
+.searchBar button {
+	background: transparent;
+	font-size: 22px;
+	border: none; /* Prevent double borders */
+	cursor: pointer;
+	color: white;
+	position: absolute;
+	left: 13px;
+	top: 11px;
+}
+
+.searchBar button:hover {
+	color: #66baff;
+}
+
+/* Clear floats */
+form.searchBar input::after {
+	content: "";
+	clear: both;
+	display: table;
 }
 
 nav {
@@ -490,8 +522,6 @@ main {
 @media only screen and (max-width: 430px) {
 	.header_container {
 		width: 95%;
-
-		justify-content: space-between;
 	}
 
 	header .logo svg {
@@ -499,10 +529,21 @@ main {
 		width: 70px;
 	}
 
+	form.searchBar {
+		margin-left: 1rem;
+	}
+
+	form.searchBar button {
+		font-size: 15px;
+		left: 11px;
+		top: 11px;
+	}
+
 	header input {
-		width: 60%;
+		width: 100%;
 		height: 40px;
 		font-size: 15px;
+		padding-left: 30px;
 	}
 
 	nav ul {

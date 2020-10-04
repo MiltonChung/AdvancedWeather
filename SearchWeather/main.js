@@ -22,6 +22,9 @@ const OPENGATE_API = {
 
 const searchbox = document.querySelector(".search-box");
 searchbox.addEventListener("keypress", setQuery);
+const searchButton = document.querySelector(".searchBar #searchButton");
+let enter = false;
+let button = false;
 var isNumber = /^[0-9]+$/;
 let lat = 0;
 let lon = 0;
@@ -32,6 +35,14 @@ function setDateOnLoad() {
 	date.innerText = dateBuilder(now);
 }
 setDateOnLoad();
+
+searchButton.addEventListener("click", () => {
+	if (searchbox.value.match(isNumber)) {
+		getResultsByZip(searchbox.value);
+	} else {
+		getResultsByCity(searchbox.value);
+	}
+});
 
 function setQuery(e) {
 	if (e.keyCode == 13) {
