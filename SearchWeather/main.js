@@ -23,11 +23,183 @@ const OPENGATE_API = {
 const searchbox = document.querySelector(".search-box");
 searchbox.addEventListener("keypress", setQuery);
 const searchButton = document.querySelector(".searchBar #searchButton");
+const convert = document.querySelector(".current .convert");
+let convertButton = document.querySelector(".current .convert button");
+convert.addEventListener("click", convertToOther);
 let enter = false;
 let button = false;
 var isNumber = /^[0-9]+$/;
 let lat = 0;
 let lon = 0;
+let currentTemp = "f";
+let mainWeatherIcon;
+
+function displayConvertButton(currentTemp) {
+	console.log("displayConvertButton");
+	if (currentTemp == "f") {
+		convert.innerHTML = `
+			<button class='convertB'>Convert to C</button>
+		`;
+	} else if (currentTemp == "c") {
+		convert.innerHTML = `
+			<button class='convertB'>Convert to F</button>
+		`;
+	}
+}
+
+function convertToOther() {
+	console.log("convertToOther");
+	if (currentTemp == "f") {
+		let temp = document.querySelector(".current .temp");
+		temp.innerHTML = `${FahToCel(
+			Number(temp.innerText.slice(0, 3))
+		)} °C ${mainWeatherIcon}`;
+
+		let feelsLike = document.querySelector(".tableLeft .row .feelLike");
+		feelsLike.innerText = `${FahToCel(
+			Number(feelsLike.innerText.slice(0, 3))
+		)} °C`;
+
+		let hourlyNowTemp = document.querySelector(
+			".hourlyRow .col .hourlyNowTemp"
+		);
+		hourlyNowTemp.innerText = `${FahToCel(
+			Number(hourlyNowTemp.innerText.slice(0, 3))
+		)} °C`;
+
+		let hourlyOneTemp = document.querySelector(
+			".hourlyRow .col .hourlyOneTemp"
+		);
+		hourlyOneTemp.innerText = `${FahToCel(
+			Number(hourlyOneTemp.innerText.slice(0, 3))
+		)} °C`;
+
+		let hourlyTwoTemp = document.querySelector(
+			".hourlyRow .col .hourlyTwoTemp"
+		);
+		hourlyTwoTemp.innerText = `${FahToCel(
+			Number(hourlyTwoTemp.innerText.slice(0, 3))
+		)} °C`;
+
+		let hourlyThreeTemp = document.querySelector(
+			".hourlyRow .col .hourlyThreeTemp"
+		);
+		hourlyThreeTemp.innerText = `${FahToCel(
+			Number(hourlyThreeTemp.innerText.slice(0, 3))
+		)} °C`;
+
+		let hourlyFourTemp = document.querySelector(
+			".hourlyRow .col .hourlyFourTemp"
+		);
+		hourlyFourTemp.innerText = `${FahToCel(
+			Number(hourlyFourTemp.innerText.slice(0, 3))
+		)} °C`;
+
+		let dailyNowTemp = document.querySelector(".dailyRow .col .dailyNowTemp");
+		dailyNowTemp.innerText = `${FahToCel(
+			Number(dailyNowTemp.innerText.slice(0, 3))
+		)} °C`;
+
+		let dailyOneTemp = document.querySelector(".dailyRow .col .dailyOneTemp");
+		dailyOneTemp.innerText = `${FahToCel(
+			Number(dailyOneTemp.innerText.slice(0, 3))
+		)} °C`;
+
+		let dailyTwoTemp = document.querySelector(".dailyRow .col .dailyTwoTemp");
+		dailyTwoTemp.innerText = `${FahToCel(
+			Number(dailyTwoTemp.innerText.slice(0, 3))
+		)} °C`;
+
+		let dailyThreeTemp = document.querySelector(
+			".dailyRow .col .dailyThreeTemp"
+		);
+		dailyThreeTemp.innerText = `${FahToCel(
+			Number(dailyThreeTemp.innerText.slice(0, 3))
+		)} °C`;
+
+		let dailyFourTemp = document.querySelector(".dailyRow .col .dailyFourTemp");
+		dailyFourTemp.innerText = `${FahToCel(
+			Number(dailyFourTemp.innerText.slice(0, 3))
+		)} °C`;
+
+		currentTemp = "c";
+		displayConvertButton(currentTemp);
+	} else if (currentTemp == "c") {
+		let temp = document.querySelector(".current .temp");
+		temp.innerHTML = `${CelToFah(
+			Number(temp.innerText.slice(0, 3))
+		)} °F ${mainWeatherIcon}`;
+
+		let feelsLike = document.querySelector(".tableLeft .row .feelLike");
+		feelsLike.innerText = `${CelToFah(
+			Number(feelsLike.innerText.slice(0, 3))
+		)} °F`;
+
+		let hourlyNowTemp = document.querySelector(
+			".hourlyRow .col .hourlyNowTemp"
+		);
+		hourlyNowTemp.innerText = `${CelToFah(
+			Number(hourlyNowTemp.innerText.slice(0, 3))
+		)} °C`;
+
+		let hourlyOneTemp = document.querySelector(
+			".hourlyRow .col .hourlyOneTemp"
+		);
+		hourlyOneTemp.innerText = `${CelToFah(
+			Number(hourlyOneTemp.innerText.slice(0, 3))
+		)} °F`;
+
+		let hourlyTwoTemp = document.querySelector(
+			".hourlyRow .col .hourlyTwoTemp"
+		);
+		hourlyTwoTemp.innerText = `${CelToFah(
+			Number(hourlyTwoTemp.innerText.slice(0, 3))
+		)} °F`;
+
+		let hourlyThreeTemp = document.querySelector(
+			".hourlyRow .col .hourlyThreeTemp"
+		);
+		hourlyThreeTemp.innerText = `${CelToFah(
+			Number(hourlyThreeTemp.innerText.slice(0, 3))
+		)} °F`;
+
+		let hourlyFourTemp = document.querySelector(
+			".hourlyRow .col .hourlyFourTemp"
+		);
+		hourlyFourTemp.innerText = `${CelToFah(
+			Number(hourlyFourTemp.innerText.slice(0, 3))
+		)} °F`;
+
+		let dailyNowTemp = document.querySelector(".dailyRow .col .dailyNowTemp");
+		dailyNowTemp.innerText = `${CelToFah(
+			Number(dailyNowTemp.innerText.slice(0, 3))
+		)} °F`;
+
+		let dailyOneTemp = document.querySelector(".dailyRow .col .dailyOneTemp");
+		dailyOneTemp.innerText = `${CelToFah(
+			Number(dailyOneTemp.innerText.slice(0, 3))
+		)} °F`;
+
+		let dailyTwoTemp = document.querySelector(".dailyRow .col .dailyTwoTemp");
+		dailyTwoTemp.innerText = `${CelToFah(
+			Number(dailyTwoTemp.innerText.slice(0, 3))
+		)} °F`;
+
+		let dailyThreeTemp = document.querySelector(
+			".dailyRow .col .dailyThreeTemp"
+		);
+		dailyThreeTemp.innerText = `${CelToFah(
+			Number(dailyThreeTemp.innerText.slice(0, 3))
+		)} °F`;
+
+		let dailyFourTemp = document.querySelector(".dailyRow .col .dailyFourTemp");
+		dailyFourTemp.innerText = `${CelToFah(
+			Number(dailyFourTemp.innerText.slice(0, 3))
+		)} °F`;
+		currentTemp = "f";
+		displayConvertButton(currentTemp);
+	}
+}
 
 function setDateOnLoad() {
 	let now = new Date();
@@ -39,19 +211,29 @@ setDateOnLoad();
 searchButton.addEventListener("click", () => {
 	if (searchbox.value.match(isNumber)) {
 		getResultsByZip(searchbox.value);
+		searchbox.value = "";
+		displayConvertButton(currentTemp);
+		convert.style.display = "block";
 	} else {
 		getResultsByCity(searchbox.value);
+		searchbox.value = "";
+		displayConvertButton(currentTemp);
+		convert.style.display = "block";
 	}
 });
 
 function setQuery(e) {
 	if (e.keyCode == 13) {
-		//enter key
-		if (searchbox.value.match(isNumber)) {
+		if (searchbox.value == "") {
+			alert("Please input a location");
+		} else if (searchbox.value.match(isNumber)) {
 			getResultsByZip(searchbox.value);
 		} else {
 			getResultsByCity(searchbox.value);
 		}
+		searchbox.value = "";
+		displayConvertButton(currentTemp);
+		convert.style.display = "block";
 	}
 }
 
@@ -193,6 +375,7 @@ function displayWeather(weather) {
 	let current_icon_code = weather.weather[0].icon;
 	let complete_icon = `<img src="${OPENWEATHER_API.icon_baseurl}${current_icon_code}@2x.png" />`;
 	temp.innerHTML = `${CelToFah(tempInC)} °F ${complete_icon}`;
+	mainWeatherIcon = complete_icon;
 
 	let weather_el = document.querySelector(".current .weather");
 	weather_el.innerText = weather.weather[0].main;
@@ -219,7 +402,7 @@ function getDetailedWeather(lat, lon) {
 
 function displayDetailedWeather(dWeather) {
 	let feelsLike = document.querySelector(".tableLeft .row .feelLike");
-	feelsLike.innerText = `${dWeather.current.feels_like}°F`;
+	feelsLike.innerText = `${Math.floor(dWeather.current.feels_like)} °F`;
 
 	let pressure = document.querySelector(".tableLeft .row .pressure");
 	pressure.innerText = `${dWeather.current.pressure} hPa`;
@@ -253,7 +436,7 @@ function displayHourlyWeather(dWeather) {
 	let hourlyNow = document.querySelector(".hourlyRow .col .hourlyNow");
 	hourlyNow.innerText = "Now";
 	let hourlyNowTemp = document.querySelector(".hourlyRow .col .hourlyNowTemp");
-	hourlyNowTemp.innerText = `${Math.floor(dWeather.current.temp)}°F`;
+	hourlyNowTemp.innerText = `${Math.floor(dWeather.current.temp)} °F`;
 	let hourlyNowIcon = document.querySelector(".hourlyRow .col .hourlyNowIcon");
 	let hourlyNowIconImg = getWeatherIconImg(dWeather.current.weather[0].icon);
 	hourlyNowIcon.innerHTML = `${hourlyNowIconImg}`;
@@ -267,7 +450,7 @@ function displayHourlyWeather(dWeather) {
 	let hourOne = new Date(dWeather.hourly[1].dt * 1000);
 	hourlyOne.innerText = formatHour(hourOne);
 	let hourlyOneTemp = document.querySelector(".hourlyRow .col .hourlyOneTemp");
-	hourlyOneTemp.innerText = `${Math.floor(dWeather.hourly[1].temp)}°F`;
+	hourlyOneTemp.innerText = `${Math.floor(dWeather.hourly[1].temp)} °F`;
 	let hourlyOneIcon = document.querySelector(".hourlyRow .col .hourlyOneIcon");
 	let hourlyOneIconImg = getWeatherIconImg(dWeather.hourly[1].weather[0].icon);
 	hourlyOneIcon.innerHTML = `${hourlyOneIconImg}`;
@@ -281,7 +464,7 @@ function displayHourlyWeather(dWeather) {
 	let hourTwo = new Date(dWeather.hourly[2].dt * 1000);
 	hourlyTwo.innerText = formatHour(hourTwo);
 	let hourlyTwoTemp = document.querySelector(".hourlyRow .col .hourlyTwoTemp");
-	hourlyTwoTemp.innerText = `${Math.floor(dWeather.hourly[2].temp)}°F`;
+	hourlyTwoTemp.innerText = `${Math.floor(dWeather.hourly[2].temp)} °F`;
 	let hourlyTwoIcon = document.querySelector(".hourlyRow .col .hourlyTwoIcon");
 	let hourlyTwoIconImg = getWeatherIconImg(dWeather.hourly[2].weather[0].icon);
 	hourlyTwoIcon.innerHTML = `${hourlyTwoIconImg}`;
@@ -297,7 +480,7 @@ function displayHourlyWeather(dWeather) {
 	let hourlyThreeTemp = document.querySelector(
 		".hourlyRow .col .hourlyThreeTemp"
 	);
-	hourlyThreeTemp.innerText = `${Math.floor(dWeather.hourly[3].temp)}°F`;
+	hourlyThreeTemp.innerText = `${Math.floor(dWeather.hourly[3].temp)} °F`;
 	let hourlyThreeIcon = document.querySelector(
 		".hourlyRow .col .hourlyThreeIcon"
 	);
@@ -317,7 +500,7 @@ function displayHourlyWeather(dWeather) {
 	let hourlyFourTemp = document.querySelector(
 		".hourlyRow .col .hourlyFourTemp"
 	);
-	hourlyFourTemp.innerText = `${Math.floor(dWeather.hourly[4].temp)}°F`;
+	hourlyFourTemp.innerText = `${Math.floor(dWeather.hourly[4].temp)} °F`;
 	let hourlyFourIcon = document.querySelector(
 		".hourlyRow .col .hourlyFourIcon"
 	);
@@ -334,7 +517,7 @@ function displayDailyWeather(dWeather) {
 	let dailyNow = document.querySelector(".dailyRow .col .dailyNow");
 	dailyNow.innerText = "Today";
 	let dailyNowTemp = document.querySelector(".dailyRow .col .dailyNowTemp");
-	dailyNowTemp.innerText = `${Math.floor(dWeather.current.temp)}°F`;
+	dailyNowTemp.innerText = `${Math.floor(dWeather.current.temp)} °F`;
 	let dailyNowIcon = document.querySelector(".dailyRow .col .dailyNowIcon");
 	let dailyNowIconImg = getWeatherIconImg(dWeather.current.weather[0].icon);
 	dailyNowIcon.innerHTML = `${dailyNowIconImg}`;
@@ -346,7 +529,7 @@ function displayDailyWeather(dWeather) {
 	let dayOne = new Date(dWeather.daily[1].dt * 1000);
 	dailyOne.innerText = formatDateAndDay(dayOne);
 	let dailyOneTemp = document.querySelector(".dailyRow .col .dailyOneTemp");
-	dailyOneTemp.innerText = `${Math.floor(dWeather.daily[1].temp.day)}°F`;
+	dailyOneTemp.innerText = `${Math.floor(dWeather.daily[1].temp.day)} °F`;
 	let dailyOneIcon = document.querySelector(".dailyRow .col .dailyOneIcon");
 	let dailyOneIconImg = getWeatherIconImg(dWeather.daily[1].weather[0].icon);
 	dailyOneIcon.innerHTML = `${dailyOneIconImg}`;
@@ -358,7 +541,7 @@ function displayDailyWeather(dWeather) {
 	let dayTwo = new Date(dWeather.daily[2].dt * 1000);
 	dailyTwo.innerText = formatDateAndDay(dayTwo);
 	let dailyTwoTemp = document.querySelector(".dailyRow .col .dailyTwoTemp");
-	dailyTwoTemp.innerText = `${Math.floor(dWeather.daily[2].temp.day)}°F`;
+	dailyTwoTemp.innerText = `${Math.floor(dWeather.daily[2].temp.day)} °F`;
 	let dailyTwoIcon = document.querySelector(".dailyRow .col .dailyTwoIcon");
 	let dailyTwoIconImg = getWeatherIconImg(dWeather.daily[2].weather[0].icon);
 	dailyTwoIcon.innerHTML = `${dailyTwoIconImg}`;
@@ -370,7 +553,7 @@ function displayDailyWeather(dWeather) {
 	let dayThree = new Date(dWeather.daily[3].dt * 1000);
 	dailyThree.innerText = formatDateAndDay(dayThree);
 	let dailyThreeTemp = document.querySelector(".dailyRow .col .dailyThreeTemp");
-	dailyThreeTemp.innerText = `${Math.floor(dWeather.daily[3].temp.day)}°F`;
+	dailyThreeTemp.innerText = `${Math.floor(dWeather.daily[3].temp.day)} °F`;
 	let dailyThreeIcon = document.querySelector(".dailyRow .col .dailyThreeIcon");
 	let dailyThreeIconImg = getWeatherIconImg(dWeather.daily[3].weather[0].icon);
 	dailyThreeIcon.innerHTML = `${dailyThreeIconImg}`;
@@ -384,7 +567,7 @@ function displayDailyWeather(dWeather) {
 	let dayFour = new Date(dWeather.daily[4].dt * 1000);
 	dailyFour.innerText = formatDateAndDay(dayFour);
 	let dailyFourTemp = document.querySelector(".dailyRow .col .dailyFourTemp");
-	dailyFourTemp.innerText = `${Math.floor(dWeather.daily[4].temp.day)}°F`;
+	dailyFourTemp.innerText = `${Math.floor(dWeather.daily[4].temp.day)} °F`;
 	let dailyFourIcon = document.querySelector(".dailyRow .col .dailyFourIcon");
 	let dailyFourIconImg = getWeatherIconImg(dWeather.daily[4].weather[0].icon);
 	dailyFourIcon.innerHTML = `${dailyFourIconImg}`;
@@ -395,7 +578,6 @@ function displayDailyWeather(dWeather) {
 function formatHour(time) {
 	let hour = time.getHours();
 	let amORpm = "am";
-	console.log(hour);
 	if (hour > 12) {
 		hour = hour - 12;
 		amORpm = "pm";
@@ -426,6 +608,10 @@ function getWeatherIconImg(code) {
 
 function CelToFah(c) {
 	return Math.round(c * 1.8 + 32);
+}
+
+function FahToCel(f) {
+	return Math.round((5 / 9) * (f - 32));
 }
 
 function dateBuilder(d) {
