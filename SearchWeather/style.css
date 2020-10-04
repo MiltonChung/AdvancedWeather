@@ -97,6 +97,7 @@ nav ul {
 	justify-content: space-between;
 	/* flex-wrap: wrap; */
 	width: 60%;
+	max-width: 1000px;
 	margin: auto;
 }
 
@@ -124,9 +125,9 @@ main {
 	text-align: left;
 }
 
-.card:first-child {
-	background: linear-gradient(to bottom, #2a37aa, rgba(95, 111, 255, 0.21));
+.card {
 	width: 60%;
+	max-width: 1000px;
 	height: 100%;
 	margin-bottom: 2rem;
 	border-radius: 13px;
@@ -135,15 +136,12 @@ main {
 	box-shadow: 3px 3px 10px 0px rgba(71, 42, 126, 0.541);
 }
 
+.card:first-child {
+	background: linear-gradient(to bottom, #2a37aa, rgba(95, 111, 255, 0.21));
+}
+
 .card:nth-child(n + 2) {
 	background: linear-gradient(to bottom, #3e4bb9, rgba(106, 95, 255, 0.21));
-	width: 60%;
-	height: 100%;
-	margin-bottom: 2rem;
-	border-radius: 13px;
-	padding: 1.5rem;
-	position: relative;
-	box-shadow: 3px 3px 10px 0px rgba(71, 42, 126, 0.541);
 }
 
 .location .city,
@@ -325,4 +323,390 @@ main {
 .dailyRow .col .temps {
 	font-size: 30px;
 	font-weight: 800;
+}
+
+.hourlyRow .col img,
+.dailyRow .col img {
+	height: 70px;
+}
+
+@media only screen and (max-width: 1120px) {
+	.card {
+		width: 70%;
+	}
+}
+
+@media only screen and (max-width: 980px) {
+	.card {
+		width: 80%;
+	}
+}
+
+@media only screen and (max-width: 830px) {
+	.card {
+		width: 90%;
+	}
+
+	.aqiContainer .aqiLeft .aqiLabel button {
+		font-size: 22px;
+		padding: 0.5rem 1.5rem;
+	}
+}
+
+@media only screen and (max-width: 700px) {
+	.card {
+		width: 98%;
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	.location .city,
+	.aqiTitle .abbrev,
+	.detailedWeather,
+	.hourlyForecast,
+	.dailyForecast {
+		font-size: 25px;
+	}
+
+	.location .date,
+	.aqiTitle .full {
+		font-size: 20px;
+	}
+
+	.location .time {
+		font-weight: 300;
+		font-size: 15px;
+	}
+
+	.current .temp {
+		color: #fff;
+		font-size: 65px;
+		margin-bottom: 0px;
+	}
+
+	.current .temp span {
+		font-weight: 500;
+	}
+
+	.temp {
+		display: block;
+		position: relative;
+	}
+
+	.current .temp img {
+		height: 180px;
+		width: 180px;
+		position: absolute;
+		right: 0;
+		top: -40px;
+	}
+
+	.current .weather {
+		font-size: 20px;
+	}
+
+	.current .hi-low {
+		font-size: 20px;
+	}
+
+	.aqiContainer {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 1rem;
+		margin-top: 0.4rem;
+		height: 100%;
+	}
+
+	.aqiLeft {
+		display: grid;
+		grid-template-rows: auto auto auto;
+	}
+
+	.aqiLeft .aqiNumber {
+		font-size: 65px;
+	}
+
+	.aqiContainer .aqiLeft .aqiLabel button {
+		padding: 0.5rem 1rem;
+		font-size: 20px;
+		width: 90%;
+	}
+
+	.aqiContainer .aqiRight {
+		font-size: 15px;
+		margin-top: 0.5rem;
+	}
+
+	.table {
+		column-gap: 0.5rem;
+	}
+
+	.table .tableLeft,
+	.table .tableRight {
+		font-size: 15px;
+		row-gap: 0.5rem;
+	}
+
+	.table .tableLeft {
+		border-right: white solid 1px;
+	}
+
+	.table .tableLeft .row,
+	.table .tableRight .row {
+		display: flex;
+		justify-content: space-between;
+		padding-right: 1.5rem;
+	}
+
+	.table .tableLeft .row svg,
+	.table .tableRight .row svg {
+		height: 15px;
+	}
+
+	.hourlyRow,
+	.dailyRow {
+		display: grid;
+		grid-template-columns: repeat(5, 1fr);
+		column-gap: 0.2rem;
+		font-size: 15px;
+	}
+
+	.hourlyRow .col .temps,
+	.dailyRow .col .temps {
+		font-size: 22px;
+	}
+}
+
+@media only screen and (max-width: 430px) {
+	.header_container {
+		width: 95%;
+
+		justify-content: space-between;
+	}
+
+	header .logo svg {
+		height: 70px;
+		width: 70px;
+	}
+
+	header input {
+		width: 60%;
+		height: 40px;
+		font-size: 15px;
+	}
+
+	nav ul {
+		width: 80%;
+	}
+
+	main {
+		padding: 10px 0px;
+	}
+
+	.card {
+		width: 97%;
+		padding: 1rem;
+		margin-bottom: 1rem;
+	}
+
+	.location .city,
+	.aqiTitle .abbrev,
+	.detailedWeather,
+	.hourlyForecast,
+	.dailyForecast {
+		font-size: 22px;
+	}
+
+	.location .date,
+	.aqiTitle .full {
+		font-size: 18px;
+	}
+
+	.location .time {
+		font-weight: 300;
+		font-size: 13px;
+	}
+
+	.current .temp {
+		color: #fff;
+		font-size: 50px;
+		margin-bottom: 0px;
+		text-shadow: none;
+	}
+
+	.current .temp img {
+		height: 120px;
+		width: 120px;
+		top: -30px;
+	}
+
+	.current .weather {
+		font-size: 18px;
+	}
+
+	.current .hi-low {
+		font-size: 18px;
+	}
+
+	.aqiLeft .aqiNumber {
+		font-size: 50px;
+		text-shadow: none;
+	}
+
+	.aqiContainer .aqiLeft .aqiLabel button {
+		padding: 0.5rem 1rem;
+		font-size: 18px;
+		width: 100%;
+	}
+
+	.aqiContainer .aqiLeft .additional {
+		font-size: 14px;
+	}
+
+	.aqiContainer .aqiRight {
+		font-size: 15px;
+		margin-top: 0.5rem;
+	}
+
+	.table {
+		column-gap: 0.2rem;
+	}
+
+	.table .tableLeft,
+	.table .tableRight {
+		font-size: 14px;
+	}
+
+	.table .tableLeft {
+		border-right: white solid 1px;
+	}
+
+	.table .tableLeft .row,
+	.table .tableRight .row {
+		display: flex;
+		justify-content: space-between;
+		padding-right: 1rem;
+	}
+
+	.table .tableLeft .row svg,
+	.table .tableRight .row svg {
+		height: 15px;
+	}
+
+	.hourlyRow,
+	.dailyRow {
+		display: grid;
+		grid-template-columns: repeat(5, 1fr);
+		column-gap: 0.2rem;
+		font-size: 15px;
+	}
+
+	.hourlyRow .col .temps,
+	.dailyRow .col .temps {
+		font-size: 22px;
+	}
+}
+
+@media only screen and (max-width: 376px) {
+	.table {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: 1fr 1fr;
+		column-gap: 0rem;
+	}
+
+	.table .tableLeft,
+	.table .tableRight {
+		font-size: 16px;
+	}
+
+	.table .tableLeft {
+		border-right: none;
+	}
+
+	.table .tableLeft .row,
+	.table .tableRight .row {
+		padding-right: 0rem;
+		border-bottom: rgba(255, 255, 255, 0.404) solid 0.5px;
+		margin-bottom: 0.2rem;
+		padding-bottom: 0.3rem;
+	}
+
+	.table .tableLeft .row svg,
+	.table .tableRight .row svg {
+		height: 16px;
+	}
+
+	.hourlyRow,
+	.dailyRow {
+		display: grid;
+		grid-template-columns: repeat(5, 1fr);
+		column-gap: 0.2rem;
+		font-size: 15px;
+	}
+
+	.hourlyRow .col .temps,
+	.dailyRow .col .temps {
+		font-size: 18px;
+	}
+
+	.hourlyRow .col img,
+	.dailyRow .col img {
+		height: 50px;
+	}
+}
+
+@media only screen and (max-width: 300px) {
+	.aqiContainer {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: 1fr 0.5fr;
+	}
+
+	.aqiLeft .aqiNumber {
+		text-align: center;
+		font-size: 80px;
+	}
+	/* 
+	.aqiContainer .aqiLeft .aqiLabel button {
+		background: rgb(25, 184, 25);
+		outline: none;
+		border: none;
+		padding: 1rem 2rem;
+		font-weight: 500;
+		color: white;
+		font-size: 28px;
+		border-radius: 20px;
+	}
+
+	.aqiContainer .aqiLeft .additional {
+		font-weight: 300;
+		color: white;
+		font-size: 15px;
+		margin-top: 1rem;
+	}
+
+	.aqiContainer .aqiRight {
+		align-self: start;
+		font-weight: 500;
+		color: white;
+		font-size: 18px;
+		margin-top: 1.2rem;
+	} */
+
+	.hourlyRow,
+	.dailyRow {
+		column-gap: 0.1rem;
+		font-size: 15px;
+	}
+
+	.hourlyRow .col .temps,
+	.dailyRow .col .temps {
+		font-size: 17px;
+	}
+
+	.hourlyRow .col img,
+	.dailyRow .col img {
+		height: 40px;
+	}
 }
