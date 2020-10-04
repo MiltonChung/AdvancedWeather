@@ -360,6 +360,16 @@ main {
 }
 
 @media only screen and (max-width: 600px) {
+	main {
+		padding: 10px 0px;
+	}
+
+	.card {
+		width: 97%;
+		padding: 1rem;
+		margin-bottom: 1rem;
+	}
+
 	.location .city,
 	.aqiTitle .abbrev,
 	.detailedWeather,
@@ -497,16 +507,6 @@ main {
 
 	nav ul {
 		width: 80%;
-	}
-
-	main {
-		padding: 10px 0px;
-	}
-
-	.card {
-		width: 97%;
-		padding: 1rem;
-		margin-bottom: 1rem;
 	}
 
 	.location .city,
