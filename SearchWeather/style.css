@@ -228,7 +228,22 @@ main {
 }
 
 .current .convert {
-	display: none;
+	display: block;
+}
+
+.current .convert .convertB {
+	background: rgba(59, 56, 255, 0.521);
+	outline: none;
+	border: rgba(47, 47, 199, 0.541) solid 1px;
+	padding: 0.5rem;
+	color: white;
+	margin-top: 0.5rem;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.current .convert .convertB:hover {
+	opacity: 0.7;
 }
 
 .current .weather {
@@ -533,11 +548,11 @@ main {
 		width: 70px;
 	}
 
-	form.searchBar {
+	.searchBar {
 		margin-left: 1rem;
 	}
 
-	form.searchBar button {
+	.searchBar button {
 		font-size: 15px;
 		left: 11px;
 		top: 11px;
