@@ -228,7 +228,7 @@ main {
 }
 
 .current .convert {
-	display: none;
+	display: block;
 }
 
 .current .convert .convertB {
