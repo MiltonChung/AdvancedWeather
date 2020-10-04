@@ -33,6 +33,34 @@ let lat = 0;
 let lon = 0;
 let currentTemp = "f";
 let mainWeatherIcon;
+let geoCity;
+
+if ("geolocation" in navigator) {
+	navigator.geolocation.getCurrentPosition(setPosition);
+}
+
+// SET USER'S POSITION
+function setPosition(position) {
+	lat = position.coords.latitude;
+	lon = position.coords.longitude;
+
+	fetch(`${OPENGATE_API.baseurl}json?q=${lat}+${lon}&key=${OPENGATE_API.key}`)
+		.then((data) => {
+			return data.json();
+		})
+		.then(getCityNameFromGeolocation);
+}
+
+function getCityNameFromGeolocation(data) {
+	geoCity = data.results[0].components.city;
+	getResultsByCity(geoCity);
+}
+
+// SHOW ERROR WHEN THERE IS AN ISSUE WITH GEOLOCATION SERVICE
+function showError(error) {
+	notificationElement.style.display = "block";
+	notificationElement.innerHTML = `<p> ${error.message} </p>`;
+}
 
 function displayConvertButton(currentTemp) {
 	console.log("displayConvertButton");
@@ -373,7 +401,7 @@ function displayWeather(weather) {
 	let tempInC = Number(`${Math.round(weather.main.temp)}`);
 
 	let current_icon_code = weather.weather[0].icon;
-	let complete_icon = `<img src="${OPENWEATHER_API.icon_baseurl}${current_icon_code}@2x.png" />`;
+	let complete_icon = `<img src="./icons/${current_icon_code}.png" />`;
 	temp.innerHTML = `${CelToFah(tempInC)} °F ${complete_icon}`;
 	mainWeatherIcon = complete_icon;
 
@@ -603,7 +631,7 @@ function formatDateAndDay(d) {
 }
 
 function getWeatherIconImg(code) {
-	return `<img src="${OPENWEATHER_API.icon_baseurl}${code}@2x.png" />`;
+	return `<img src="./icons/${code}.png" />`;
 }
 
 function CelToFah(c) {
