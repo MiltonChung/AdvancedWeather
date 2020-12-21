@@ -1,4 +1,4 @@
-https://miltonchung.github.io/weather/SearchWeather/
+https://miltonchung.github.io/AdvancedWeather/
 
 <!-- Todo:
 -add more support for aqi
