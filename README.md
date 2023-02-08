@@ -1,4 +1,4 @@
-# MusiCloud
+# Advanced Weather
 
 Realtime weather app that shows the current weather, AQI, hourly+daily forecasts, and detailed weather information like wind speed and humidity.
 
